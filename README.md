@@ -1,4 +1,4 @@
-# Born2beRoot
+# Born2beRoot BROUILLON POUR MOI DEBUT PROJET LE 10/12
 
     C'est quoi une virtual machine ? Psk finalement à part un jour dans ta vie ou t as betement suivie un tuto tu sais pas vraiment comment ca fonctionne.
 
@@ -51,6 +51,28 @@ create format disponible =
     VHD (Virtual Hard Disk, ce que j ai choisi, mais je me suis trompée) = utilise par microsoft, compatible avec d autres hypervisuers (Hyper V ou Azure), si projet de migrations de VM vers d autre hyperviseur good choice
     VDMK (Virtualmachine disk) = format natif de VMware
     
+![Screenshot from 2024-12-11 18-57-03](https://github.com/user-attachments/assets/0abc55ea-3c4b-481e-84f0-0fc788ad5a50)
+<= ce que je faire 
+lsblk => commande pour afficher cela 
+NAME : Nom du périphérique ou de la partition.
+MAJ:MIN : Indicateurs majeurs et mineurs pour identifier le périphérique dans le système.
+RM : Indique si le périphérique est amovible (1 pour amovible, 0 pour non amovible).
+SIZE : Taille du périphérique ou de la partition.
+RO : Indique si le périphérique est en lecture seule (1 pour lecture seule, 0 sinon).
+TYPE : Type du périphérique, par exemple disk (disque entier), part (partition), lvm (volume logique LVM), ou crypt (périphérique chiffré).
+MOUNTPOINT : Point de montage, c'est-à-dire où le périphérique ou la partition est accessible dans le système de fichiers.
+
+sda(8g) = disque principal qui contient plusieurs partitions 
+sda1 (467M) = partition monte sur /boot = contient le chargeur de demmarrage et les fichiers necessaires pour demarrer le systeme
+sda2(1k) = une partition tres petite 
+sda5(7.5G) = une partition principal qui est chiffré (indiquée par sda5_crypt)
+sda5_crypt = la partition chiffrée est dévérouillée et contient des volumes logiques gérés par LVM (logical volume manager) 
+        wil--vg--root (2.8G) = volume logique pour le systeme racine / (OS installe)
+        wil--vg_swap_1(976M) = VL pour partition d echange swap, utilise en memoire supp si RAM sature
+        will--vg-home(3.8GB) = VL pour repertoire personnel des useur (/home)
+    sr0(12024M) = lecteur optique cd/dvd ici non monte 
+
+    
 
 sudo -i = passer le prompt en mode root (evite de retaper sudo)
 adduser <i/nomutilisateuri> sudo
@@ -61,6 +83,8 @@ SELlinux / AppArmor =
 Service ssh = 
 
 OS conf avec pare-feu UFW = (ne laisser qu'ouvert port4242 sur VM) parefeu doit etre actif au lancement de la VM
+https://debian-facile.org/doc:systeme:ufw
+
 Hostname = laureline42 (comment modifier nom de l 'hostname ? )
 USEUR en plus avec pour nom votre login en plusde l'useur root (useur appartient au groupe user42 et sudo)
 Comment creer un nouvel utulisateur et lui assigner un groupe ? 
