@@ -4,7 +4,7 @@
 
 Virtual box
 
-Environnement virtualise qui fonctionne sur une machine physique. Elle ex son propre OS et bénéficie des equipement physique de la machine. 
+Environnement virtualise qui fonctionne sur une machine physique. Elle exec son propre OS et bénéficie des equipement physique de la machine. 
 https://www.redhat.com/fr/topics/virtualization/what-is-a-virtual-machine
 Debian version stable ?
 
@@ -41,6 +41,55 @@ PE (etendue physique)
 
 sudo -i = passer le prompt en mode root (evite de retaper sudo)
 adduser <i/nomutilisateuri> sudo
+
+Aptitude/apt = 
+SELlinux / AppArmor = 
+
+Service ssh = 
+
+OS conf avec pare-feu UFW = (ne laisser qu'ouvert port4242 sur VM) parefeu doit etre actif au lancement de la VM
+Hostname = laureline42 (comment modifier nom de l 'hostname ? )
+USEUR en plus avec pour nom votre login en plusde l'useur root (useur appartient au groupe user42 et sudo)
+Comment creer un nouvel utulisateur et lui assigner un groupe ? 
+
+    MDP = Fort,expire tous les 30 days, nbr minimum de jours avant de pouvoir modif  un mdp = 2; useur recevra un avertissement 7 jours avant que son mdp n expire, mdp = 10 char mini, une maj, une minuscule, un chiffre et pas de + de trois char identiques consecutifs, ne doit pas comporter le nom d utilisateurs, mot de passe ne doit pas contenir 7 caracteres presents dans l 'ancien mot de passe (derniere regle ne s'applique pas au root) mais le root doit suivre les précédentes régles 
+
+=> apres avoir mis en place vos fichiers de config, il faudra changer tous les mdp des comptes présents sur la machine virtuelle, root inclus.
+
+
+
+    SUDO = installation selon une pratique strict, authentification en utilisant sudo limitee a 3 essaie en cas de mdp faux, si erreur mdp lors de sudo = affichier le message de votre choix, actions de sudo a archivé (inputs et outputs) ici = /var/log/sudo/.
+    activé mode TTY (pour des raisons de securite)
+    paths utilisables pour sudo restreint exemple : /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+
+    monitoring.sh (en bash) = script qui ecrit des infos toutes les 10 minutes sur tous les terminaux (notion a regarder : wall). bannière facultative, aucune erreur ne doit etre visibile. 
+    script doit afficher = artchitecture os et version kernel, nbr processus physique et virtuels, memoire vive dispo sur le serveur et son taux d utilisation sous forme de %, memoire dispo sur serveur et taux d utilisation sou forme de %, taux d utilsation actuel du processeurs sous forme %
+    date et heure du dernier redemmarage 
+    si LVM est actif ou non
+    nbr connexion actives
+    nbr useur utilisant le service
+    adresse IPV4 du serveur ainsi que son adresse MAC 
+    nbr de commande exe avec sudo 
+    Interrompre exe sans le modifier, regarder cron ?
+
+EXEMPLE sujet = 
+    
+    Broadcast message from root@wil (tty1) (Sun Apr 25 15:45:00 2021):
+    #Architecture: Linux wil 4.19.0-16-amd64 #1 SMP Debian 4.19.181-1 (2021-03-19) x86_64 GNU/Linux
+    #CPU physical : 1
+    #vCPU : 1
+    #Memory Usage: 74/987MB (7.50%)
+    #Disk Usage: 1009/2Gb (49%)
+    #CPU load: 6.7%
+    #Last boot: 2021-04-25 14:45
+    #LVM use: yes
+    #Connexions TCP : 1 ESTABLISHED
+    #User log: 1
+    #Network: IP 10.0.2.15 (08:00:27:51:9b:a5)
+    #Sudo : 42 cmd
+
+
+Logiciel VirtualBox
 
     Port 4242
     Settings -> Network -> Port Forwading -> new -> RULE 1 - TCP - Hostport = 4242, GuestPort = 4242
