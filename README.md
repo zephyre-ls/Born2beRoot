@@ -2,24 +2,35 @@
 
     C'est quoi une virtual machine ? 
 
-Virtual box ?
+Virtual box
 
 Environnement virtualise qui fonctionne sur une machine physique. Elle ex son propre OS et bénéficie des equipement physique de la machine. 
 https://www.redhat.com/fr/topics/virtualization/what-is-a-virtual-machine
 Debian version stable ?
 
-C'est quoi une partition ?
+Partition 
 
 Partition/region/disque = section d un support de stockage, le partionnement est une operation qui consiste à diviser les sections pour que le systeme d'exploitation gère les informations de manières séparée. 
 Organisation, rapidite d'acces, securite
 
-      Designation 
+Designation 
 
 Windows = C: D:etc
 Mac OS = diskNsM (N= numero du support, M=numero de la partition sur le support 
 Linux/unix/gnu = sdXN (X= lettre qui represente le support, N=numero de la partition) ex sdb3 = troisieme partition du disque b. 
 
-C'est quoi LVM ? 
+LVM
+
+        Commandes
+        sudo pvcreate / / (converti un disque ou une partition en PV)
+        sudo pvs (affiche VP dispo)
+        sudo vgcreate <nom_du_vg> / / (regroupement en VG)
+        sudo vgs (affiche VG, taille et detail)
+        sudo lvcreate -L <taille> -n <nom_du_lv> <nom_du_vg> (cree VL)
+        sudo lvs (afficge VL)
+        
+
+
 
 Gestionnaire de volumes logiques pour le noyaux linux. But = fournir une couche d'abstraction entre l'espace de stockage physique et le systeme. Permet la création de partitions virtuelles.
 Elements qui composent LVM =
