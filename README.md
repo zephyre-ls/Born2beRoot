@@ -1,6 +1,6 @@
 # Born2beRoot
 
-    C'est quoi une virtual machine ? 
+    C'est quoi une virtual machine ? Psk finalement à part un jour dans ta vie ou t as betement suivie un tuto tu sais pas vraiment comment ca fonctionne.
 
 Virtual box
 
