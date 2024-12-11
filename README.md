@@ -39,6 +39,19 @@ VG (groupe de vol.) =
 LV (vol.logique) = espace dans un VG ou l'on peut mettre un systeme de fichier (remplace les partitions).
 PE (etendue physique)
 
+![Screenshot from 2024-12-11 16-13-20](https://github.com/user-attachments/assets/bc9ae435-32ae-4820-837b-715899c59b7d)
+
+Storage = 
+Hard Disk virtuel = (VDI, VHD ou autre) sotckage principal de ma VM.
+Option associe = Solid-State Drive (SSD) = permet de simuler un disque SSD, a active si tu veux que la machine profite des optis de perf d un SSD. Si desactivte = disque dur simule comme un HDD classico
+
+Dans VM = Setting VM, storage, disquettebleu+, ajouter un harddisk,
+create format disponible = 
+    VDI (VirtualBox Disk Image) = format natif de virtualbox, meilleur perf, recommande si utilisateur juste de VB
+    VHD (Virtual Hard Disk, ce que j ai choisi, mais je me suis trompée) = utilise par microsoft, compatible avec d autres hypervisuers (Hyper V ou Azure), si projet de migrations de VM vers d autre hyperviseur good choice
+    VDMK (Virtualmachine disk) = format natif de VMware
+    
+
 sudo -i = passer le prompt en mode root (evite de retaper sudo)
 adduser <i/nomutilisateuri> sudo
 
