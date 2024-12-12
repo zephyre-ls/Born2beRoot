@@ -72,7 +72,49 @@ sda5_crypt = la partition chiffrée est dévérouillée et contient des volumes 
         will--vg-home(3.8GB) = VL pour repertoire personnel des useur (/home)
     sr0(12024M) = lecteur optique cd/dvd ici non monte 
 
-    
+![Screenshot from 2024-12-12 14-18-32](https://github.com/user-attachments/assets/e46e9830-4070-4814-bd8c-352b1b0a2859)
+
+Type de partitions =
+ext4 = fiable grace a la journalisation (enregistre les changements avant des les appliquer = recup rapide apres un crash. utilisation principal pour /, /home
+ext3 = ancetre d 'ext4, diff = bonne compatibilite avec ancien syst, moins performant et opti
+ext2 = ancien systeme de linux sans journalisation, - decriture disque, ideal pour clef USB ou partition specifique(/boot), pas de journalisation = plus vulnerables au corruption, crash 
+btrfs = fonctionnalite en plus = compression, gestion snapshots et RAID, utilisation typique = serveur, config experimental
+JFS = dev par IBM, concu pour les syst avec une utilisation faire du CPU, avantage: rapide pour les fichiers volumineux
+XFS = ideal pour gros fichiers, gestion avance des donnes. Utilisation = systeme de stockage de donnes 
+FAT16/FAT32 = fichier simple utilise sur les supports amovibles comme clefs USB. Compatible: windows, mac, linux; utilisation = partitions partages sur plusieurs os 
+Swap area = partition utilise comme memoire virtuelle, permet d etendre la RAM sb. Toujours en avoir une
+Physical volume for encryption = prepare une partion pour le chiffrement (avec LUKS) = securise une partition avec un mdp
+Physical volume for RAID = prepare une partition pour etre utilises dans une configuration RAID (Redudant Array of indenpendant disks). 
+Physical volume for LVM = partition pour l utilisation dans LVM
+Do not use the partition = bah tu l ignores et l utilasation 
+
+![Screenshot from 2024-12-12 14-36-53](https://github.com/user-attachments/assets/99b0c8b5-d027-4185-ad6e-e7ff3d12202b)
+
+Point de montage = 
+/(root) = racine du syts fichier, la ou tout commence. Tous les autres partitions/point de montage se trouve sous cette racine. Rôle = systeme OS, binaires essentiels, bibliotheque et trucs indispensables au demarrage. 
+/boot = fichier necessaire au demmarage du systeme, separer boot des autres permet si il y a un pb dans d autres partitions les fichiers du demarrage sont accessible. Kernel et GRUB
+/home = dossier perso des useur, 
+/tmp = fichier temporaire utilises par les application, ameliore secu, previent conflits espace disque
+/usr = fichier logiciel installe par syst ou useur, facilite sauvegarde
+/var = stock fichier log, fichier temporaire d'application, tache. 
+/srv = donnes de service fourni par ordi, si serveur web = fichiers stock partages et accessible a d autre ordinateurs
+/opt = logiciel additionnels installes manuellement par l'admin, facile l'orga des logiciels non standard
+/usr/local =installe des programmes ou des fihciers specifique a l utilisateur qui ne viennent pas avec le syst par defautl.
+
+![Screenshot from 2024-12-12 14-49-24](https://github.com/user-attachments/assets/56c29c35-426b-47c6-aafd-435e0c63f3fa)
+
+discard = active TRIM commands sur SSD (= indique au SSD quels bloc ne sont plus utilises et peuvent etre effaces, ameliore perd et duree de vie du disque). Cette option effectur un TRIM a chaque supp de fichier. On peut configurer trip periodiquement avec une tache cron (fstrim)
+noatime = empeche maj date d acces d un fichier ou dossier lorsqu'il est lu. Utile = ameliore perf en reduisant le nbr d ecriture. Utile pour syst ou acces en lecture est frequent comme serveur ou base de donnes. Apres si t en as besoin pour la secu tu le met pas 
+nodiratime = noatime + s applique specifiquement au dossier (directories)
+relatime = maj role d accs (atime) si date d acces est anteireux a la der modif ou si la dernire maj d atime a eu lieu il y a plus de 24h
+nodev = empeche la creation ou l utilisation de fichiers speciaux de type periph (bloc de disque ou tty)
+nosuid = empeche l exe de fichier avec le bit SUID(set User ID) ou SGID(set group id) = fichier ne peux pas s ex avec les privileges d un autre useur, renforce secu sur les systeme multi utilisateurs
+noexec = empeche exe de programme sur une partition, securite partition ou il n y a pas besoin d exe /home /tmp. Si un useur mechant place un script ou un programme dans /tmp, il ne pourra pas exe.
+ro = monte le systeme de fichier en lecture seule a utilise sur une partition ou aucune modif ne doit etre apporte exemple : sauvegarde ou disque systeme protégé 
+sync = force toutes les ecritures sur le disque a se produire now, normalement les ecriture sont mises en cache pour etre effecture plus tard (plus rapide) = reduit risque perte de donnes si panne decourant. Inconveniant = ralenti perf d ecriture
+usrquota = gere les quotas pour les useur sur un syst de fichier, limite l espace disque qu un useur peut utiliser
+grpquota = meme sur usr sauf qu elle gere un groupe
+user_xattr = stock attributs etendus sur un systeme de fichier ce qui peut inclus des infos supp sur les fichier, des donnes specifiques a l useur ou des metadonnes 
 
 sudo -i = passer le prompt en mode root (evite de retaper sudo)
 adduser <i/nomutilisateuri> sudo
