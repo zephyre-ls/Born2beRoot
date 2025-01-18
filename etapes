@@ -1,0 +1,26 @@
+Born2beroot - Etapes 
+
+1 - DL Virtual box 
+2 - DL image iso debian version stable 
+3 - 
+Hostname = lduflot42 
+Motdepasse = motdepasse66600. 
+Domain name = borntobeeroot
+Root mdp = motdepasse66600.
+newuser = user42
+usurname for you account : user42
+mdp = motdepasse66600. 
+Time zone =
+4 - Partitions 
+Manuel = 
+ - Selection du disque principal (sda) 
+ a - création /boot 
+  487 MO, Type : Primaire, Begenning, ext4, /boot 
+ b - Partition chiffré 
+  7,5Go, type : primaine, espace réservé pour le chiffrement
+configure encrypted volume 
+passphrase = cryptique
+pour qu'il porte le nom sda5 créer la partition aprés la précédente
+ c - 
+
+
