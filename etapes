@@ -105,8 +105,16 @@ passwd user42 = modifier mdp
 
 10 - Archivage commande sudo input/outputs
 
+https://medium.com/@18bhavyasharma/effective-linux-administration-with-sudoedit-and-sudoreplay-514b350fe286
 
 
+sudo :/var/log/sudo exists but is not a directory 0100644  
+modifier sudo qui est un fichier en répertoire = 
+
+11- Modifier date 
+sudo chage -m 2 root
+sudo chage -M 30 root
+sudo chage -l root (affichage)
 
 
 
