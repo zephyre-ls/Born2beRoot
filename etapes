@@ -104,17 +104,52 @@ https://www.debian.org/doc/manuals/debian-reference/ch04.fr.html
 passwd user42 = modifier mdp
 
 10 - Archivage commande sudo input/outputs
+sudo vim /var/log/sudo => acces a l'archive
+
+sudo vim /etc/sudoers 
+Defaults log_output
+Defaults log_input
+Defaults iolog_dur="/var/log/sudo"
 
 https://medium.com/@18bhavyasharma/effective-linux-administration-with-sudoedit-and-sudoreplay-514b350fe286
 
 
 sudo :/var/log/sudo exists but is not a directory 0100644  
-modifier sudo qui est un fichier en répertoire = 
+modifier sudo qui est un fichier en répertoire = en sudo.old
 
-11- Modifier date 
+11- Nbr total d'essaie autorisé mdp lors d'une commande sudo
+Defaults passwd_tries=3
+Defaults badpass_message="Tu n'avais que 3 chances"
+
+12- TTY
+Defaults requiretty
+
+13- Path utilisable par sudo restreint
+Defaults secure_path="/usr/local/sbin:/user/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+
+14- Mettre a jour la date du changement de mdp
 sudo chage -m 2 root
 sudo chage -M 30 root
 sudo chage -l root (affichage)
+
+15- SCRIPT monitoring.sh
+Dev en bash 
+=> de le lancement de votre serveur le script ecrira les infor tts les 10 min sur tous les terminaux (wall)
+Banniere facultative
+
+      Affichage
+_ Architecture OS v kernel
+https://www.it-connect.fr/recuperer-des-informations-sur-son-systeme-linux-avec-uname/
+_ Nbr processeur physique
+_                virtuels
+_ Memoire vive dispo et memoire dispo actuelle sur votre serveur ainsi que son tx utilisation sous %
+_ Taux d'utilisation actuel processeyr en % 
+_ Date et heure du dernier redemarrage
+_ LVM actif ou pas
+_ Nbr connexions active
+_ Nbr d'useur sur le serveur
+_ Adresse IPV4 et adresse Mac
+_ nbr de commande ext par sudo 
 
 
 
