@@ -15,13 +15,101 @@ Time zone =
 Manuel = 
  - Selection du disque principal (sda) 
  a - création /boot 
-  487 MO, Type : Primaire, Begenning, ext4, /boot 
+  487 MO, Type : logique, Begenning, ext4, /boot 
  b - Partition chiffré 
  Le reste, type : logique, physical volume for enscryption
 configure encrypted volume 
 passphrase = cryptique
 pour qu'il porte le nom sda5 créer la partition aprés la précédente
 créer un groupe un groupe de volume LVM nom = lduflot
- c - 
+puis création de home, swap, help
+ c - finish installation, no media, no statistique, yes grub 
+
+5 - Installation sudo
+ su - (passage en mode admin) 
+ apt-get install sudo (installation de sudo) 
+ sudo adduser lduflot42 (ajouter des droits sudo à l'utilisateur) 
+ sudo addgroup user42 (création d'un groupe d'acces à sudo pour les autres utilisateurs)
+
+6 - SSH (Secure Shell) = protocole réseau sécurisé qui permet de se connecter à un autre ordinateur sur un réseau (local ou internet).
+But = Administer un serveur à distance = ext commande à distance, transfert fichier
+Securité = SSH utilise des chiffrements pour protect la communication entre client/serveur. Evite que mdp ou commande soient interceptées.
+(Clé publique que tout le monde peut lire et quand  tu te co clef privée)
+ Installation de SSH =
+ sudo apt udpdate
+ sudo apt install openssh-server
+ sudo systemctl status ssh (verification que le service est ok)
+
+ config du port et des restrictions 
+ installation vim sudo apt install vim 
+ sudo vim /etc/ssh/sshd_config (fichier de config principal pour le serveur SSH) sshd = secure shell daemon.Determine comment SSH doit fonctionner et les regles de connexions.
+
+ modif = Port 4242 
+ PermitRootLogin no (user root ne pas se connecter par SSH)
+
+ sudo vim /etc/ssh_config (fichier de configuration pour le client SSH (et non le serveur != sshd)
+determine le cpt de ton client SSH lorsque tu te co a distance
+fichier # (commentaire, ligne non pris en compte), retrait du # devant port 
+
+ sudo service ssh restart 
+ sudo service ssh status (port4242 s'affiche
+
+7 PareFeu UFW - Ne laisser ouvert que le port 4242
+Pare-feu/Firewall = barrière de sécurité qui controle le trafic réseau entrant/sortant du systeme/réseau.
+Filte type de connexion, paquets de données autorisé ou bloqué.
+Protège systeme, bloque connection indésirables 
+Limite acces = autorisé certaines adresses IP ou port
+Regule trafic = controle quelles appli/service peuvent accéder à internet ou ordinateurs
+UFW = uncomplicatef firewal
+Installer le paquet = sudo apt install ufw
+sudo ufw status (disable). Pour l'appliquer = enable
+sudo ufw status verbose (affiche les instructions)
+sudo ufw allow 4242 = autorise les connexions entrantes sur le port 4242.
+Tout ce qui essaie de se co au serveur via ce port passeront à travers le pare feu
+sudo systemctl enable ufw = ufw se lance au démarrage 
+https://doc.ubuntu-fr.org/ufw
+
+8 - Modification du HOSTNAME
+hostname = affiche nom
+hostnamectl = affiche plus de détail 
+modifier le nom = sudo hostnamectl set-hostname nouveau_nom
+
+Creation nouvelle utilisateur = 
+useradd lduflot
+création du mdp = passwd lduflot
+mettre l'user dans groupe user42 et sudo = adduser lduflot sudo 
+                                           adduser lduflot user42
 
 
+9 - Politique de mdp
+
+sudo vim /etc/login.defs = fichier qui définit plusieurs parametre
+Expire tous les 30j = PASS_MAX_DAYS 30
+Nbr min de jours avant de pouvoir modif un mdp est 2 jours PASS_MIN_DAYS 2
+Notification 7 jours avant que mdp expire PASS-WARN-AGE 7
+10 caractere mini PASS_MIN_LEN 10 
+
+sudo vim /etc/pam.d/common-password = regle supplémentaire, utiliser via PAM (Plaggalbe Authentication Module) présent sous UNIX.
+sudo apt-get install libpam-pwquality 
+sudo vim /etc/pam.d/ 
+
+fichier common-password = gere regle constructions des mdp
+password requisite pam_pwquality (1chiffre)dcredit=-1 (1maj)ucredit=-1 (1minus)lcredit=-1 (minicaract)minlen=10 (pas3caractconsécurit)maxrepeat=3
+difok=1 (mdp!=nameuser)
+
+Root doit suivre cette politique 
+en + pour autre user = le mdp devra comporter au moins 7 caractere non présent dans l'ancien
+https://www.debian.org/doc/manuals/debian-reference/ch04.fr.html
+
+passwd user42 = modifier mdp
+
+10 - Archivage commande sudo input/outputs
+
+
+
+
+
+
+ 
+
+ 
