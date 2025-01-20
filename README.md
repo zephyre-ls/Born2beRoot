@@ -4,7 +4,7 @@
 
 - Virtual box
 
-Environnement virtualise qui fonctionne sur une machine physique. Elle exec son propre OS et bénéficie des equipement physique de la machine. 
+Environnement virtualise qui fonctionne sur une machine physique. Elle exec son propre OS et bénéficie des equipement physique de la machine. Elle fonctionne de maniere isole et ses ressources de maniere simulé.  
 https://www.redhat.com/fr/topics/virtualization/what-is-a-virtual-machine
 Debian version stable ?
 
