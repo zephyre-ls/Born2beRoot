@@ -191,6 +191,9 @@ sudo vim /etc/login.defs
 - Notification 7 jours avant que le mot de passe expire : PASS_WARN_AGE 7
 - Longueur minimale du mot de passe (10 caractères) : PASS_MIN_LEN 10
 
+  - Pour verifier : sudo chage -l useur
+  - A savoir si création des useurs antérieur avant les modif password ne s'applique pas. Il faut les faire       manuellement. Ou supp et recréer les useur (c'est con)
+
 2. Modifier les règles supplémentaires via PAM (Pluggable Authentication Module) : 
 sudo vim /etc/pam.d/common-password
 - Installer `libpam-pwquality` pour gérer la qualité des mots de passe : sudo apt-get install libpam-pwquality
