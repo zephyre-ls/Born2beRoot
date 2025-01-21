@@ -266,3 +266,13 @@ https://cloud.theodo.com/blog/partitionnement-disques-lvm
 
 Sudo/root = 
 
+
+Script "monitoring.sh".
+Bash 
+!/bin/bash
+$( ) 
+grep
+wc -l -w
+awk 
+
+
