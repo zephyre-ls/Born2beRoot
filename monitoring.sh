@@ -52,6 +52,4 @@ if pgrep -x "vim" > /dev/null; then
     echo "Vim est actif, script reporté à la prochaine exécution."
     exit 0
 fi
-
-#Utilisation de la fonction wall pour envoyer le message 
 wall"$message"
