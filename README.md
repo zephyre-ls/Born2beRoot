@@ -426,12 +426,17 @@ Les points de montage servent à organiser le système de fichiers, permettant u
 
 
 ## .Sources
-https://doc.ubuntu-fr.org/lvm
-https://cloud.theodo.com/blog/partitionnement-disques-lvm
-https://manpages.debian.org/unstable/util-linux-locales/wall.1.fr.html
-https://www.linuxtricks.fr/pages/bienvenue-sur-linuxtricks
-https://manpages.debian.org/
-https://www.debian.org/doc/index.fr.html
+- https://doc.ubuntu-fr.org/lvm
+- https://cloud.theodo.com/blog/partitionnement-disques-lvm
+- https://manpages.debian.org/unstable/util-linux-locales/wall.1.fr.html
+- https://www.linuxtricks.fr/pages/bienvenue-sur-linuxtricks
+- https://manpages.debian.org/
+- https://www.debian.org/doc/index.fr.html
+- https://www.redhat.com/fr/topics/virtualization/what-is-a-virtual-machine
+- https://tutobox.fr/tuto-debian-mot-de-passe-root-perdu-comment-faire
+- https://www.linuxtricks.fr/wiki/sudo-utiliser-et-parametrer-sudoers
+- https://stackoverflow.com/questions/47806576/username-is-not-in-the-sudoers-file-this-incident-will-be-reported
+- https://www.debian.org/doc/manuals/aptitude/ch02s01s04.fr.html
 
 
 
