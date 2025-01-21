@@ -49,7 +49,6 @@ message="
 
 # Vérifie si VIM est en route, si actif pas de script. (Parce que c'est relou)
 if pgrep -x "vim" > /dev/null; then
-    echo "Vim est actif, script reporté à la prochaine exécution."
     exit 0
 fi
 wall"$message"
