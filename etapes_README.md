@@ -4,7 +4,21 @@
 
 ## 2. Télécharger l'image ISO Debian (version stable)
 Iso choisi : `debian-12.9.0-amd64-netinst.iso`.
+- Choix de Debian par rapport à Rocky (le sujet dit que Debian est pour les débutants, je suis une débutante)
+- Rocky est plus orienté entreprise
+- Debian est flexible, polyvalent et libre.
 
+### Apt / Aptitude 
+- Outils pour la gestions des paquets sur les distrib Linux.
+- Apt permet une gestion plus simple, il est rapide et simple d'utilisatation. Il est pas défault sur les distrib.
+- Aptitude se montre plus puissant et plus interactif, mais demande un niveau avancé. Il est plus interactif avec une interface semi-graphique.
+
+### Selinux/ Apparmor
+- SELlinux (Security-Enhanced Linux)
+  Founir une sécurité avec une politque strcites pour process et fichier.
+-AppArmor (Application Armot)
+  Fournit une sécurité basé sur des profils prédéfinis ou personnalisé pour les appli. Cette solution est plus simple à configurer.
+  
 ## 3. Configuration de la machine virtuelle
 ### Paramètres initiaux :
 - **Hostname** : `lduflot42`
@@ -31,18 +45,17 @@ Iso choisi : `debian-12.9.0-amd64-netinst.iso`.
 
 ## 5. Installation de `sudo`
 1. **Passage en mode administrateur** :
-   - Exécutez la commande suivante pour passer en mode administrateur :
+   - Commande pour passer en mode root/administrateur :
      ```bash
      su -
      ```
    
 2. **Installation de `sudo`** :
-   - Installez `sudo` avec la commande suivante :
      ```bash
      apt-get install sudo
      ```
 
-3. **Ajouter l'utilisateur au groupe `sudo`** :
+3. **Ajout utilisateur au groupe `sudo`** :
    - Ajoutez l'utilisateur `lduflot42` au groupe `sudo` pour lui accorder des droits administratifs :
      ```bash
      sudo adduser lduflot42
@@ -63,7 +76,6 @@ Le processus fonctionne avec une clé publique, que tout le monde peut lire, et 
 ### Installation de SSH
 
 1. **Mettre à jour les sources de paquets** :
-   - Exécutez la commande suivante pour mettre à jour les sources :
      ```bash
      sudo apt update
      ```
@@ -75,7 +87,6 @@ Le processus fonctionne avec une clé publique, que tout le monde peut lire, et 
      ```
 
 3. **Vérifier l'état du service SSH** :
-   - Vérifiez que le service SSH fonctionne correctement :
      ```bash
      sudo systemctl status ssh
      ```
@@ -83,35 +94,31 @@ Le processus fonctionne avec une clé publique, que tout le monde peut lire, et 
 ### Configuration du port et des restrictions
 
 1. **Installation de `vim` pour la modification des fichiers de configuration** :
-   - Installez `vim` pour éditer les fichiers de configuration :
      ```bash
      sudo apt install vim
      ```
 
 2. **Modification du fichier de configuration du serveur SSH** :
-   - Ouvrez le fichier de configuration principal pour le serveur SSH (`sshd_config`) :
+   - Ouvrir fichier de configuration principal:
      ```bash
      sudo vim /etc/ssh/sshd_config
      ```
-   - Modifiez les paramètres suivants :
+   - Modifiez les paramètres:
      - **Port 4242** : changez le port d'écoute par défaut à 4242.
      - **PermitRootLogin no** : désactivez l'accès SSH pour l'utilisateur `root` pour des raisons de sécurité.
    
 3. **Modification du fichier de configuration pour le client SSH** :
-   - Ouvrez le fichier de configuration pour le client SSH (`ssh_config`) :
-     ```bash
+    ```bash
      sudo vim /etc/ssh/ssh_config
      ```
-   - Retirez le commentaire (#) devant `Port 4242` pour spécifier que le client SSH se connecte sur le port 4242.
+   - Retirez les commentaire (#) devant `Port 4242` 
 
-4. **Redémarrer le service SSH pour appliquer les modifications** :
-   - Redémarrez le service SSH pour appliquer les changements :
+5. **Redémarrer le service SSH pour appliquer les modifications** :
      ```bash
      sudo service ssh restart
      ```
    
-5. **Vérifier que le service SSH fonctionne sur le port 4242** :
-   - Vérifiez que le port 4242 est bien en écoute :
+6. **Vérifier que le service SSH fonctionne sur le port 4242** :
      ```bash
      sudo service ssh status
      ```
@@ -129,35 +136,31 @@ UFW (Uncomplicated Firewall) est un outil de gestion de pare-feu simple pour les
      ```
 
 2. **Vérifier l'état de UFW** :
-   - Vérifiez l'état du pare-feu :
+
      ```bash
      sudo ufw status
      ```
-   - Par défaut, UFW est désactivé. Pour l'activer, utilisez la commande suivante :
+   - Par défaut, UFW est désactivé. Pour l'active :
      ```bash
      sudo ufw enable
      ```
 
 3. **Afficher des informations détaillées sur l'état de UFW** :
-   - Pour obtenir des détails supplémentaires sur l'état de UFW :
      ```bash
      sudo ufw status verbose
      ```
 
 4. **Autoriser uniquement les connexions entrantes sur le port 4242** :
-   - Autorisez les connexions sur le port 4242, utilisé pour SSH :
      ```bash
      sudo ufw allow 4242
      ```
    - Cela permet uniquement les connexions qui tentent de se connecter au serveur via ce port.
 
 5. **Activer UFW au démarrage du système** :
-   - Assurez-vous que UFW démarre automatiquement avec le système :
      ```bash
      sudo systemctl enable ufw
      ```
-
-Pour plus d'informations sur l'utilisation de UFW, vous pouvez consulter la documentation officielle [ici](https://doc.ubuntu-fr.org/ufw).
+[Documentation](https://doc.ubuntu-fr.org/ufw).
 
 ## 8 - Modification du HOSTNAME et Création d'un Nouvel Utilisateur
 
@@ -167,29 +170,33 @@ Pour plus d'informations sur l'utilisation de UFW, vous pouvez consulter la docu
 - Pour modifier le nom de l'hôte :
   ```bash
   sudo hostnamectl set-hostname nouveau_nom
-  ### Création d'un Nouvel Utilisateur
 
-1. Créer un nouvel utilisateur :
-   ```bash
-   useradd lduflot
+#### Création d'un Nouvel Utilisateur
+
+  ```bash
+ useradd lduflot
+  ```
+
 ### Création du Mot de Passe et Attribution des Groupes
 
-2. Créer le mot de passe pour l'utilisateur `lduflot` :
    ```bash
    passwd lduflot
+  ```
+
 ### Ajouter l'utilisateur au groupe `user42` et au groupe `sudo`
 
-3. Ajouter l'utilisateur `lduflot` au groupe `sudo` :
    ```bash
    sudo adduser lduflot sudo
+  ```
 
 ## 9 - Politique de mot de passe
+
 1. Modifier les paramètres de politique de mot de passe : 
 sudo vim /etc/login.defs
-- Expiration du mot de passe tous les 30 jours : PASS_MAX_DAYS 30
-- Nombre minimum de jours avant de pouvoir modifier un mot de passe : PASS_MIN_DAYS 2
-- Notification 7 jours avant que le mot de passe expire : PASS_WARN_AGE 7
-- Longueur minimale du mot de passe (10 caractères) : PASS_MIN_LEN 10
+- Expiration du mot de passe tous les 30 jours : `PASS_MAX_DAYS 30`
+- Nombre minimum de jours avant de pouvoir modifier un mot de passe : `PASS_MIN_DAYS 2`
+- Notification 7 jours avant que le mot de passe expire : `PASS_WARN_AGE 7`
+- Longueur minimale du mot de passe (10 caractères) : `PASS_MIN_LEN 10`
 
   - Pour verifier : sudo chage -l useur
   - A savoir si création des useurs antérieur avant les modif password ne s'applique pas. Il faut les faire       manuellement. Ou supp et recréer les useur (c'est con)
@@ -211,9 +218,10 @@ sudo vim /etc/sudoers
 Ajouter les lignes suivantes pour activer l'archivage :
 Defaults log_output
 Defaults log_input
-Defaults iolog_dir="/var/log/sudo"
+Defaults logfile= "/var/log/sudo/sudo.log"
+   (Mkdir dossier sudo puis touch fichier sudo.log afin d'archiver les commandes)
 
-3. Rencontre d'une : 
+4. Rencontre d'une erreur : 
 sudo :/var/log/sudo exists but is not a directory 0100644
 Cela signifie que /var/log/sudo est un fichier au lieu d'un répertoire. Pour le corriger, modifier le fichier pour qu'il devienne un répertoire
 sudo mv /var/log/sudo /var/log/sudo.old
@@ -221,7 +229,7 @@ sudo mkdir /var/log/sudo
 
 ## 11- Nombre total d'essais autorisés pour un mot de passe lors d'une commande sudo :
 Defaults passwd_tries=3
-Defaults badpass_message="Tu n'avais que 3 chances"
+Defaults badpass_message="Tu n'as que 3 tentatives"
 
 ## 12- TTY
 Defaults requiretty
@@ -238,9 +246,15 @@ sudo chage -l root  # Affichage des informations
 [Lien vers le script clique ici, oui, oui.](./monitoring.sh)
 
 ## 16- Crontab
-sudo crontab -u root-e 
+```sudo crontab -u root-e ```
 Configurer le fichier
 *10/ * * * * sh /home/monitoring.sh // Affichage toutes les 10 minutes
+- */10 = tts les 10 mins
+- 2nd * = tts les heures / plage horaire ex h-h (8-18)
+- 3eme * = tts les jours du mois
+- 4eme * = ts les mois
+- 5eme * = tous les jours de la semaine / plage journalière ex(1-5 = du lundi au vendredi)
+  
 @reboot sh /home/monitoring.sh // Affichage au démarrage d'une session
 Remarque = note d'une erreur, lorsque je suis sur un fichier VIM, le script apparait et cache le texte, necessité de fermé et réouvrir le fichier. Ajout d'une ligne de code dans le fichier monitoring.sh pour éviter le spam.
 
