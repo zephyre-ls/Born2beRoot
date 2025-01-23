@@ -258,6 +258,8 @@ Configurer le fichier
 @reboot sh /home/monitoring.sh // Affichage au démarrage d'une session
 Remarque = note d'une erreur, lorsque je suis sur un fichier VIM, le script apparait et cache le texte, necessité de fermé et réouvrir le fichier. Ajout d'une ligne de code dans le fichier monitoring.sh pour éviter le spam.
 
+ss -tuln 
+
 
 
    
