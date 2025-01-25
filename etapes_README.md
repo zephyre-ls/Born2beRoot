@@ -260,8 +260,8 @@ Remarque = note d'une erreur, lorsque je suis sur un fichier VIM, le script appa
 
 ss -tuln 
 
-
-
+## 17- Récupérer la signature de la VM
+- VBoxManage list vms = list vm {signature}
    
 
 
