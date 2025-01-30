@@ -43,7 +43,7 @@ message="
 # Last boot        : $(who -b | awk '$1 == "system" {print $3 " " $4}')
 # LVM use          : $(lvscan | grep -q "ACTIVE" && echo "Actif" || echo "Innactif")
 # Connexions TCP   : $(ss -t | grep -c ESTAB)
-# User log         : $(user | wc -w)
+# User log         : $(who | wc -l)
 # IPV4             : $(hostname -I)
 # MAC              : $(ip link show | grep "link/ether" | awk '{print $2}')
 # Sudo             : $cmds cmd
